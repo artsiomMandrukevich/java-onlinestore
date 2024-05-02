@@ -17,7 +17,7 @@ Console commands emulate the client's HTTP client side.
 
 CONSOLE | ENDPOINT | TYPE | DESCRIPTION | BODY |
 --- |--- | --- | --- | --- | 
-category | /get-category | get | returns select from `category` |
+category | /get-category | GET | returns select from `category` |
 | | /get-products | GET | returns select from `product` |
 sort | /get-sort-products | GET | returns select sorted products from `product` |
 top | /get-top-products | GET | returns select TOP 5 products from `product` |
