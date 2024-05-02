@@ -23,7 +23,7 @@ public class StoreHelper {
     private Map<Category, Integer> createMapOfCatefory(){
         Map<Category, Integer> mapOfCategory = new HashMap<>();
 
-        Reflections reflections = new Reflections("by.issoft.domain.categories", new SubTypesScanner());
+        Reflections reflections = new Reflections("by.artem.domain.categories", new SubTypesScanner());
         Set<Class<? extends Category>> subTypes = reflections.getSubTypesOf(Category.class);
 
         for(Class<? extends Category> type : subTypes){
