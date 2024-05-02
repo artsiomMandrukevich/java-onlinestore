@@ -1,21 +1,29 @@
 package by.artem.consoleApp;
 
-import by.artem.store.Helper.StoreHelper;
-import by.artem.store.Helper.StoreInteraction;
+import by.artem.store.helper.StoreHelper;
+import by.artem.store.helper.StoreInteraction;
 import by.artem.store.Store;
 
-import java.io.IOException;
+import by.artem.store.multithreading.CleanUpThread;
+import lombok.SneakyThrows;
 
 public class StoreApp {
 
-    public static void main(String[] args) throws IOException {
+    @SneakyThrows
+    public static void main(String[] args) {
 
         Store store = Store.getInstance();
+
         StoreHelper sh = new StoreHelper(store);
         StoreInteraction storeInteraction = new StoreInteraction(store);
 
         sh.fillOutProductList();
+
+        final CleanUpThread cleanUpThread = new CleanUpThread(store);
+        new Thread(cleanUpThread).start();
+
         storeInteraction.ConsoleInteraction();
+        cleanUpThread.finish();
 
     }
 
