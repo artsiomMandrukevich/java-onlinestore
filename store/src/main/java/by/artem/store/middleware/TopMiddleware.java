@@ -1,12 +1,12 @@
 package by.artem.store.middleware;
 
 import by.artem.store.Store;
-import by.artem.store.helper.SQLHelper;
+import by.artem.store.http.HTTPHelper;
 
 public class TopMiddleware extends Middleware{
 
     Store store;
-    SQLHelper sqlHelper = new SQLHelper();
+    HTTPHelper httpHelper = new HTTPHelper();
 
     public TopMiddleware(Store store) {
         this.store = store;
@@ -14,7 +14,7 @@ public class TopMiddleware extends Middleware{
 
     public boolean check(String consoleCommand) {
         if(consoleCommand.toUpperCase().equals(CommandValues.TOP.toString())){
-            sqlHelper.selectTop5FromProductTable();
+            httpHelper.httpClientHitEndpoint("/get-top-products");
             return false;
         }
         return checkNext(consoleCommand);

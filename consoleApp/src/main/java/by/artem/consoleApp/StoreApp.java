@@ -4,7 +4,7 @@ import by.artem.store.helper.StoreHelper;
 import by.artem.store.helper.StoreInteraction;
 import by.artem.store.Store;
 
-import by.artem.store.multithreading.CleanUpThread;
+import by.artem.store.http.HTTPServer;
 import lombok.SneakyThrows;
 
 public class StoreApp {
@@ -19,11 +19,11 @@ public class StoreApp {
 
         sh.fillOutProductList();
 
-        final CleanUpThread cleanUpThread = new CleanUpThread(store);
-        new Thread(cleanUpThread).start();
+        HTTPServer httpServer = new HTTPServer();
+        httpServer.startHttpServer();
 
         storeInteraction.ConsoleInteraction();
-        cleanUpThread.finish();
+        httpServer.stopHTTPServer();
 
     }
 
