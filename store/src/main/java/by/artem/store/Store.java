@@ -2,6 +2,7 @@ package by.artem.store;
 
 import by.artem.domain.Category;
 import by.artem.domain.Product;
+import by.artem.store.tools.sort.StoreComparator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +11,12 @@ public class Store {
 
     private List<Category> productCategoryList;
 
+    StoreComparator storeComparator = new StoreComparator();
+
     private Store(){
         this.productCategoryList = new ArrayList<>();
     }
 
-    public List<Product> getAllProducts(){
-        List<Product> listProduct = new ArrayList<>();
-        for(Category outputList : this.productCategoryList) {
-            listProduct.addAll(outputList.getProductList());
-        }
-        return listProduct;
-    }
 
     private static class SingletoneHelper{
         private static final Store storeInstance = new Store();
@@ -30,6 +26,14 @@ public class Store {
     public static Store getInstance(){
         return SingletoneHelper.storeInstance;
 
+    }
+
+    public List<Product> getAllProducts(){
+        List<Product> listProduct = new ArrayList<>();
+        for(Category outputList : this.productCategoryList) {
+            listProduct.addAll(outputList.getProductList());
+        }
+        return listProduct;
     }
 
     public void setProductCategoryList(Category category) {
@@ -47,6 +51,14 @@ public class Store {
             System.out.println("Category = " + outputList.getName());
             printProduct(outputList.getProductList());
         }
+    }
+
+    public void printSortProducts(){
+        printProduct(storeComparator.sortProduct(getAllProducts()));
+    }
+
+    public void printTopProducts(){
+        printProduct(storeComparator.top5ProductPrice(getAllProducts()));
     }
 
 }
