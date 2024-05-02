@@ -1,4 +1,4 @@
-package by.artem.store.tools;
+package by.artem.store.tools.sort;
 
 public enum SortValues {
     ASC, DESC
