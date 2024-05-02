@@ -1,4 +1,4 @@
-package by.artem.store.Helper;
+package by.artem.store.helper;
 
 import com.github.javafaker.Faker;
 

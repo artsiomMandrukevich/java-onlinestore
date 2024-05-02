@@ -1,4 +1,4 @@
-package by.artem.store.Helper;
+package by.artem.store.helper;
 
 import by.artem.store.middleware.*;
 import by.artem.store.Store;
@@ -6,6 +6,9 @@ import by.artem.store.Store;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
+
+import lombok.SneakyThrows;
 
 public class StoreInteraction {
 
@@ -26,17 +29,22 @@ public class StoreInteraction {
 
         Middleware middleware = new SortMiddleware(store);
         middleware.linkWith(new TopMiddleware(store))
-                .linkWith(new QuitMiddleware()).linkWith(new UnknownMiddleware());
+                .linkWith(new CreateOrderMiddleware(store))
+                .linkWith(new PrintPurchasesMiddleware(store))
+                .linkWith(new QuitMiddleware())
+                .linkWith(new UnknownMiddleware());
 
         middlewareServer.setMiddleware(middleware);
     }
 
-    public void ConsoleInteraction() throws IOException {
+    @SneakyThrows
+    public void ConsoleInteraction() {
         initMiddleware();
         boolean isQuit = false;
 
         while(!isQuit){
-            System.out.print("Enter command (sort, top, quit): ");
+            TimeUnit.MILLISECONDS.sleep(300);
+            System.out.print("Enter command (sort, top, create_order, print_purchases, quit): ");
             isQuit = middlewareServer.processingMiddleware(InputString());
         }
     }

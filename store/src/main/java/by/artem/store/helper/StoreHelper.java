@@ -1,4 +1,4 @@
-package by.artem.store.Helper;
+package by.artem.store.helper;
 
 import by.artem.domain.Category;
 import by.artem.domain.CategoryFactory;
