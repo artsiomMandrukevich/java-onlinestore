@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class StoreComparator {
 
     private static final int TOP_PRICE = 5;
-    private static final String PATH_TO_XML_SORT_CONFIG = "store/src/main/resources/config.xml";
+    public static final String PATH_TO_XML_SORT_CONFIG = "store/src/main/resources/config.xml";
 
     public static List<Comparator<Product>> buildListOfComparators(Map<String, SortValues> sortedmap){
 
